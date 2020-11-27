@@ -33,7 +33,7 @@ const CurrentTodoList = () => {
 
   return(
     <Paper className={classes.paper}>
-      <Modal open={isModalOpen} handleClose={() => setModalOpen(false)} id={modalId} />
+      {isModalOpen && <Modal handleClose={() => setModalOpen(false)} id={modalId} />}
       <Typography variant="h6" color="primary" className={classes.title}>Current To-Do List</Typography>
       <List>
       {_.chain(todo)

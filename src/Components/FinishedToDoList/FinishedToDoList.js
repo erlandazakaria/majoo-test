@@ -32,7 +32,7 @@ const FinishedToDoList = () => {
   const [modalId, setModalId] = React.useState(0);
   return(
     <Paper className={classes.paper}>
-      <Modal open={isModalOpen} handleClose={() => setModalOpen(false)} id={modalId} />
+      {isModalOpen && <Modal handleClose={() => setModalOpen(false)} id={modalId} />}
       <Typography variant="h6" color="primary" className={classes.title}>Finished To-Do List</Typography>
       <List>
       {_.chain(todo)

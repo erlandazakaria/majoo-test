@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import CurrentToDoList from './Components/CurrentToDoList';
 import FinishedToDoList from './Components/FinishedToDoList';
+import Modal from './Components/Modal';
 
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -11,6 +12,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,6 +42,9 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     overflow: 'auto',
     flexDirection: 'column',
+  },
+  addNew: {
+    fontWeight: 'bold'
   }
 }));
 
@@ -47,6 +52,7 @@ const App = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const state = useSelector((state) => state.todo);
+  const [isModalOpen, setModalOpen] = React.useState(false);
   console.log(state)
 
   React.useState(async () => {
@@ -62,6 +68,7 @@ const App = () => {
 
   return (
     <div className={classes.root}>
+      {isModalOpen && <Modal handleClose={() => setModalOpen(false)} id={0} />}
       <CssBaseline />
       <AppBar position="absolute" className={classes.appBar}>
         <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
@@ -72,6 +79,13 @@ const App = () => {
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
+            <Grid item xs={12}>
+              <Button variant="contained" onClick={() => setModalOpen(true)} color="primary">
+                <Typography variant="body1" className={classes.addNew}>
+                  Add new To-Do
+                </Typography>
+              </Button>
+            </Grid>
             <Grid item xs={6}>
               <CurrentToDoList />
             </Grid>
