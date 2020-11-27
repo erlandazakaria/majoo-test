@@ -13,7 +13,12 @@ const todoReducer = (state=initialState, action) => {
     case "UPDATE_TODO":
       let newState = state.map(ns => {
         if(ns.id ===payload.id) {
-          return payload
+          return {
+            ...ns,
+            title: payload.title,
+            description: payload.description,
+            status: payload.status
+          }
         } else {
           return ns
         }

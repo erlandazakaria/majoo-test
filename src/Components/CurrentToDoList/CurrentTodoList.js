@@ -11,7 +11,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
-import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -49,7 +49,7 @@ const CurrentTodoList = () => {
               key={`currentTodo-${t.id}`}
             >
               <ListItemIcon>
-                <RadioButtonUncheckedIcon fontSize="small" />
+                <CheckBoxOutlineBlankIcon />
               </ListItemIcon>
               <ListItemText primary={t.title} />
             </ListItem>

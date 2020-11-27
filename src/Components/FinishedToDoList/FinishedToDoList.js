@@ -11,7 +11,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
-import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -47,7 +47,7 @@ const FinishedToDoList = () => {
             key={`finishedTodo-${t.id}`}
           >
             <ListItemIcon>
-              <RadioButtonCheckedIcon fontSize="small" />
+              <CheckBoxIcon />
             </ListItemIcon>
             <ListItemText primary={t.title} />
           </ListItem>

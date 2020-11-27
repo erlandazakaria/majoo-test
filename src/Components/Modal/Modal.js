@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -10,7 +11,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import moment from 'moment';
+import Switch from '@material-ui/core/Switch';
+import Typography from '@material-ui/core/Typography';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -72,9 +74,37 @@ const Modal = ({handleClose, id}) => {
               defaultValue={todo[0].description}
             />
           </div>
+          <div className={classes.description}>
+            <Typography variant="body1">Is it Finished?</Typography>
+            <Switch
+              defaultChecked={todo[0].status === 0 ? false : true}
+              name="update-status"
+              color="primary"
+              id="update-status"
+            />
+          </div>
         </DialogContent>
         <DialogActions>
-          <Button variant="contained" onClick={onClose} color="primary">
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => {
+              if(document.getElementById('update-title').value !== ''
+                && document.getElementById('update-description').value !== ''
+              ) {
+                dispatch({
+                  type: "UPDATE_TODO",
+                  payload: {
+                    id: todo[0].id,
+                    title: document.getElementById('update-title').value,
+                    description: document.getElementById('update-description').value,
+                    status: document.getElementById('update-status').checked === true ? 1 : 0
+                  }
+                });
+                onClose();
+              }
+            }}
+          >
             Save
           </Button>
         </DialogActions>
