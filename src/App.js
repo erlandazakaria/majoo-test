@@ -86,10 +86,10 @@ const App = () => {
                 </Typography>
               </Button>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
               <CurrentToDoList />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
               <FinishedToDoList />
             </Grid>
           </Grid>

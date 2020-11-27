@@ -9,7 +9,7 @@ const todoReducer = (state=initialState, action) => {
     case "ADD_TODO":
       return [...state, payload];
     case "DELETE_TODO":
-      return state.filter(s => s.id !== payload.id);
+      return state.filter(s => s.id !== payload);
     case "UPDATE_TODO":
       let newState = state.map(ns => {
         if(ns.id ===payload.id) {

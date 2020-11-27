@@ -22,6 +22,9 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     fontWeight: 'bold'
+  },
+  empty: {
+    textAlign: 'center'
   }
 }));
 
@@ -30,30 +33,30 @@ const CurrentTodoList = () => {
   const todo = useSelector((state) => state.todo);
   const [isModalOpen, setModalOpen] = React.useState(false);
   const [modalId, setModalId] = React.useState(0);
+  let currentTodo = _.chain(todo).orderBy(['createdAt'], ['asc']).value().filter(s => s.status === 0);
 
   return(
     <Paper className={classes.paper}>
       {isModalOpen && <Modal handleClose={() => setModalOpen(false)} id={modalId} />}
       <Typography variant="h6" color="primary" className={classes.title}>Current To-Do List</Typography>
-      <List>
-      {_.chain(todo)
-      .orderBy(['createdAt'], ['asc'])
-      .value()
-      .filter(s => s.status === 0).map(t => {
-        return (
-          <ListItem 
-            button 
-            onClick={() => {setModalId(t.id); setModalOpen(true);}}
-            key={`currentTodo-${t.id}`}
-          >
-            <ListItemIcon>
-              <RadioButtonUncheckedIcon fontSize="small" />
-            </ListItemIcon>
-            <ListItemText primary={t.title} />
-          </ListItem>
-        );
-      })}
-      </List>
+      {currentTodo.length > 0 ? 
+        <List>
+        {currentTodo.map(t => {
+          return (
+            <ListItem 
+              button 
+              onClick={() => {setModalId(t.id); setModalOpen(true);}}
+              key={`currentTodo-${t.id}`}
+            >
+              <ListItemIcon>
+                <RadioButtonUncheckedIcon fontSize="small" />
+              </ListItemIcon>
+              <ListItemText primary={t.title} />
+            </ListItem>
+          );
+        })}
+        </List>
+      : <Typography variant="h6" className={classes.empty}>No To-Do List Left!</Typography>}
     </Paper>
   );
 }

@@ -101,7 +101,18 @@ const Modal = ({handleClose, id}) => {
           <Button variant="contained" onClick={() => setUpdate(true)} color="primary">
             Update
           </Button>
-          {todo[0].status === 0 && <Button onClick={onClose} variant="outlined" color="primary">
+          {todo[0].status === 0 &&
+            <Button 
+              variant="outlined"
+              color="primary"
+              onClick={() => {
+                dispatch({
+                  type: "DELETE_TODO",
+                  payload: todo[0].id
+                });
+                onClose();
+              }}
+            >
             Delete
           </Button>}
         </DialogActions>
