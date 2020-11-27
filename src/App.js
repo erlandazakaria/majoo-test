@@ -1,7 +1,26 @@
+import React from 'react';
+import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
+
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state.todo);
+  console.log(state)
+
+  React.useState(async () => {
+    const initialData = await axios({
+      method: 'get',
+      url: 'https://virtserver.swaggerhub.com/hanabyan/todo/1.0.0/to-do-list'
+    });
+    dispatch({
+      type: 'FETCH_TODO',
+      payload: initialData.data
+    })
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
