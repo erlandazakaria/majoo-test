@@ -2,13 +2,15 @@ import React from 'react';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 
+import CurrentToDoList from './Components/CurrentToDoList';
+import FinishedToDoList from './Components/FinishedToDoList';
+
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,8 +43,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-
-function App() {
+const App = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const state = useSelector((state) => state.todo);
@@ -71,10 +72,11 @@ function App() {
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
-            <Grid item xs={12}>
-              <Paper className={classes.paper}>
-                PAPER
-              </Paper>
+            <Grid item xs={6}>
+              <CurrentToDoList />
+            </Grid>
+            <Grid item xs={6}>
+              <FinishedToDoList />
             </Grid>
           </Grid>
         </Container>
