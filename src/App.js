@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import CurrentToDoList from './Components/CurrentToDoList';
 import FinishedToDoList from './Components/FinishedToDoList';
 import Modal from './Components/Modal';
+import Copyright from './Components/Copyright';
 
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,6 +13,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
@@ -53,7 +55,6 @@ const App = () => {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.todo);
   const [isModalOpen, setModalOpen] = React.useState(false);
-  console.log(state)
 
   React.useState(async () => {
     const initialData = await axios({
@@ -93,6 +94,9 @@ const App = () => {
               <FinishedToDoList />
             </Grid>
           </Grid>
+          <Box pt={4}>
+            <Copyright />
+          </Box>
         </Container>
       </main>
     </div>

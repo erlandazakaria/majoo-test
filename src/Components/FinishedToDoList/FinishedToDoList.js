@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { useSelector } from 'react-redux';
 import Modal from '../Modal';
 
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
@@ -12,6 +12,12 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
+
+const ListItemIconWithStyle = withStyles((theme) => ({
+  root: {
+    minWidth: '35px'
+  },
+}))(ListItemIcon);
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -46,9 +52,9 @@ const FinishedToDoList = () => {
             onClick={() => {setModalId(t.id); setModalOpen(true);}}
             key={`finishedTodo-${t.id}`}
           >
-            <ListItemIcon>
-              <CheckBoxIcon />
-            </ListItemIcon>
+            <ListItemIconWithStyle>
+              <CheckBoxIcon color="primary" />
+            </ListItemIconWithStyle>
             <ListItemText primary={t.title} />
           </ListItem>
         );
